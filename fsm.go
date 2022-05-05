@@ -218,9 +218,10 @@ func (c *Conn) monitor(ctx context.Context) {
 					return
 				}
 			}
-
+			data := make([]byte,n)
+			copy(data,buf[:n])
 			// Parse the received packet as M3UA. Undecodable packets are ignored.
-			msg, err := messages.Parse(buf[:n])
+			msg, err := messages.Parse(data[:n])
 			if err != nil {
 				continue
 			}
